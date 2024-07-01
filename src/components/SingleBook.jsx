@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import { Component } from "react";
+import CommentArea from "./CommentArea";
 
 class SingleBook extends Component {
   state = {
@@ -21,6 +22,8 @@ class SingleBook extends Component {
           <Card.Text>Category: {this.props.book.category}</Card.Text>
           <Badge bg="dark">€ {this.props.book.price}</Badge>
           <Button variant="primary">Buy</Button>
+
+          {this.state.selected && <CommentArea asin={this.props.book.asin} />}
         </Card.Body>
       </Card>
     );
