@@ -1,19 +1,15 @@
-import { Alert, Badge, ListGroup } from "react-bootstrap";
+import { Alert, ListGroup, Spinner } from "react-bootstrap";
+import SingleComment from "./SingleComment";
 
-const CommentsList = ({ comments }) =>
-  comments.length > 0 ? (
+const CommentsList = ({ comments, isLoading }) =>
+  comments.length > 0 && !isLoading ? (
     <ListGroup>
       {comments.map((review) => (
-        <ListGroup.Item
-          key={review._id}
-          title={review.author}
-          className="d-flex justify-content-between align-items-center"
-        >
-          {review.comment}
-          <Badge bg="dark">{review.rate}</Badge>
-        </ListGroup.Item>
+        <SingleComment key={review._id} review={review} />
       ))}
     </ListGroup>
+  ) : isLoading ? (
+    <Spinner animation="border" variant="primary" />
   ) : (
     <Alert variant="warning">Non ci sono ancora recensioni per questo libro.</Alert>
   );

@@ -1,10 +1,12 @@
 import { Component } from "react";
 
 import CommentsList from "./CommentsList";
+import AddComment from "./AddComment";
 
 class CommentArea extends Component {
   state = {
     comments: [],
+    isLoading: true,
   };
 
   fetchComments = () => {
@@ -26,7 +28,8 @@ class CommentArea extends Component {
         this.setState({ comments });
         console.log(comments);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(this.setState({ isLoading: false }));
   };
 
   componentDidMount() {
@@ -38,7 +41,8 @@ class CommentArea extends Component {
     console.log("io sono RENDER");
     return (
       <>
-        <CommentsList comments={this.state.comments} />
+        <AddComment asin={this.props.asin} />
+        <CommentsList comments={this.state.comments} isLoading={this.state.isLoading} />
       </>
     );
   }
