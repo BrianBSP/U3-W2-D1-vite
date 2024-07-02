@@ -28,18 +28,24 @@ class BookList extends Component {
           </Col>
         </Row>
         <Row>
-          {this.props.books
-            .filter((book) => {
-              return book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase());
-            })
-            .map((book) => {
-              return (
-                <Col xs={12} md={4} key={book.asin}>
-                  <SingleBook book={book} />
-                </Col>
-              );
-            })}
-          <CommentArea />
+          <Col xs={12} md={6}>
+            <Row className="g-2 mt-3">
+              {this.props.books
+                .filter((book) => {
+                  return book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase());
+                })
+                .map((book) => {
+                  return (
+                    <Col xs={12} md={4} key={book.asin}>
+                      <SingleBook book={book} />
+                    </Col>
+                  );
+                })}
+            </Row>
+          </Col>
+          <Col xs={12} md={6}>
+            <CommentArea />
+          </Col>
         </Row>
       </Container>
     );
